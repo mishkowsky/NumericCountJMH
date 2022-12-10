@@ -41,6 +41,9 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 import java.util.concurrent.*;
 import java.util.function.Function;
 
+import static org.spbstu.aleksandrov.NumericalCount.countIntegral;
+import static org.spbstu.aleksandrov.NumericalCount.countIntegralParallel;
+
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @State(Scope.Benchmark)
@@ -69,20 +72,20 @@ public class RealisationsBenchmark {
 
     @Benchmark
     public void sequentialDouble(Blackhole bh) {
-        double result = NumericCount.countIntegral(a, b, precision, piIntegral, true);
+        double result = countIntegral(a, b, precision, piIntegral, true);
         bh.consume(result);
     }
 
     @Benchmark
     public void parallelDouble(Blackhole bh) {
-        double result = NumericCount.countIntegralParallel(
+        double result = countIntegralParallel(
                 a, b, precision, threadAmount, piIntegral, threadAmount);
         bh.consume(result);
     }
 
     @Benchmark
     public void parallelDoubleB(Blackhole bh) {
-        double result = NumericCount.countIntegralParallel(
+        double result = countIntegralParallel(
                 a, b, precision, 2 * threadAmount, piIntegral, threadAmount);
         bh.consume(result);
     }

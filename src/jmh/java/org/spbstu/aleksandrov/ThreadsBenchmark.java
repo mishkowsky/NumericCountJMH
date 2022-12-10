@@ -6,6 +6,8 @@ import org.openjdk.jmh.infra.Blackhole;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
+import static org.spbstu.aleksandrov.NumericalCount.countIntegralParallel;
+
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @State(Scope.Benchmark)
@@ -24,7 +26,7 @@ public class ThreadsBenchmark {
         int precision = 5;
         double a = 0d;
         double b = 1d;
-        double result = NumericCount.countIntegralParallel(
+        double result = countIntegralParallel(
                 a, b, precision, threads, piIntegral, threads);
         bh.consume(result);
     }

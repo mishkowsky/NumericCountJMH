@@ -12,7 +12,7 @@ import static java.lang.Math.abs;
 import static java.lang.Math.pow;
 import static org.apache.commons.math3.util.Precision.round;
 
-public class NumericCount {
+public class NumericalCount {
 
     public static double countIntegral(
             double a, double b, int precision, Function<Double, Double> function, boolean round) {
@@ -49,7 +49,7 @@ public class NumericCount {
             double aConst = ai;
             double bConst = bi;
             futures.add(executor.submit(() ->
-                    NumericCount.countIntegral(aConst, bConst, precision + 1, piIntegral, false)));
+                    countIntegral(aConst, bConst, precision + 1, piIntegral, false)));
             ai += h;
             bi += h;
         }
